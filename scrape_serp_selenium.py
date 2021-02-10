@@ -36,7 +36,7 @@ def select_proxy():
     #print(type(data['PROXY'].iat[0]))
     global proxy
     proxy = (data['PROXY'].iat[0])
-    print('---------------------Request IP is '+proxy)
+    print(f'---------------------Request IP is {proxy}')
     timestr_now = str(datetime.now())
     #print(timestr_now)
     #global timestr
