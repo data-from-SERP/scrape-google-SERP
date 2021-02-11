@@ -104,16 +104,13 @@ for _ in range(num_random_process):
     print(f'new_keyword ------- {new_keyword}')
     #accettazione cookie
     new_url = f'{domain_search}{new_keyword}&oq={new_keyword}&hl={hl}&gl={gl}&tci={tci}&uule={uule}&sourceid=chrome&ie=UTF-8'
-    #new_url = 'https://paolareghenzi.it'
     #print(new_url)
     driver.get(new_url)
-    #print(driver.get(new_url))
-    #driver.implicitly_wait(10)
     current_url = driver.current_url
     captcha_url = 'sorry/index?continue'
     print(current_url)
     if captcha_url in current_url:
-        print('captcha trovato')
+        print('captcha trovato in URL')
         timestr = time.strftime('%Y%m%d-%H%M%S')
         with open(test_proxy, 'a') as f:
             f.write(f"{proxy};{timestr};Richiesta Captcha;{new_keyword};\n")
