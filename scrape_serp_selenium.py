@@ -176,7 +176,7 @@ for _ in range(num_random_process):
                 num = random.randint(1,3)
                 #print(f'pausa {num} sec')
                 with open(test_proxy, 'a') as f:
-                    f.write(f"{proxy};{timestr};Richiesta Captcha;{new_keyword};\n")
+                    f.write(f"{proxy};{timestr};Richiesta Fallita;{new_keyword};\n")
                     print('file scritto correttamente')
                     # Selezione proxy
                 
@@ -208,7 +208,7 @@ for _ in range(num_random_process):
                 num = random.randint(1,3)
                 #print(f'pausa {num} sec')
                 with open(test_proxy, 'a') as f:
-                    f.write(f"{proxy};{timestr};Richiesta Captcha;{new_keyword};\n")
+                    f.write(f"{proxy};{timestr};Richiesta Fallita;{new_keyword};\n")
                     print('file scritto correttamente')
                     # Selezione proxy
                 
