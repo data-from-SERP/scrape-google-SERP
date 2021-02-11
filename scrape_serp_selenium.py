@@ -64,7 +64,8 @@ def select_keyword():
     #print(f'pausa {num} sec')
 
     #print(keyword)
-    new_keyword1 = keyword.replace(" ", "+")
+    new_keyword2 = keyword.replace("%", "%25")
+    new_keyword1 = new_keyword2.replace(" ", "+")
     global new_keyword
     new_keyword = new_keyword1.replace("/", "-")
     #print(new_keyword)
