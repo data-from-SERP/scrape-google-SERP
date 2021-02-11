@@ -166,8 +166,6 @@ for _ in range(num_random_process):
                 print('YYYYYYYYYY-no captcha')
             else:
                 print('trovato introAgreeButton')
-                #os.remove(filename)
-                print('file eliminato')
                 conn = sqlite3.connect(db_name_keyword)
                 c = conn.cursor()
                 c.execute("Update KEYWORDS_LIST set CHECKING = 0 where KEYWORDS = ?",(keyword,))
@@ -179,7 +177,6 @@ for _ in range(num_random_process):
                     f.write(f"{proxy};{timestr};Richiesta Fallita;{new_keyword};\n")
                     print('file scritto correttamente')
                     # Selezione proxy
-                
                 conn = sqlite3.connect(db_name_proxy)
                 c = conn.cursor()
                 #print(type(data['PROXY'].iat[0]))
@@ -191,6 +188,7 @@ for _ in range(num_random_process):
                 conn.commit()
                 #print('pausa 1 sec')
                 conn.close()
+                os.remove(filename)
                 driver.close()
                 
             #secondo controllo
@@ -198,8 +196,6 @@ for _ in range(num_random_process):
                 print('YYYYYYYYYY-no captcha')
             else:
                 print('trovato sub-frame-error-details')
-                #os.remove(filename)
-                print('file eliminato')
                 conn = sqlite3.connect(db_name_keyword)
                 c = conn.cursor()
                 c.execute("Update KEYWORDS_LIST set CHECKING = 0 where KEYWORDS = ?",(keyword,))
@@ -210,8 +206,6 @@ for _ in range(num_random_process):
                 with open(test_proxy, 'a') as f:
                     f.write(f"{proxy};{timestr};Richiesta Fallita;{new_keyword};\n")
                     print('file scritto correttamente')
-                    # Selezione proxy
-                
                 conn = sqlite3.connect(db_name_proxy)
                 c = conn.cursor()
                 #print(type(data['PROXY'].iat[0]))
@@ -223,6 +217,7 @@ for _ in range(num_random_process):
                 conn.commit()
                 #print('pausa 1 sec')
                 conn.close()
+                os.remove(filename)
                 driver.close()
 
             print('YYYYYYYYYY-no captcha')
@@ -241,20 +236,17 @@ for _ in range(num_random_process):
 
         else:
             print('file minore di 70 KB')
-            #os.remove(filename)
-            print('file eliminato')
             conn = sqlite3.connect(db_name_keyword)
             c = conn.cursor()
             c.execute("Update KEYWORDS_LIST set CHECKING = 0 where KEYWORDS = ?",(keyword,))
             conn.commit()
             conn.close()
             num = random.randint(1,3)
-            #print(f'pausa {num} sec')
+            #print(f'pausa {num} sec') 
             with open(test_proxy, 'a') as f:
                 f.write(f"{proxy};{timestr};Richiesta Captcha;{new_keyword};\n")
                 print('file scritto correttamente')
                 # Selezione proxy
-            
             conn = sqlite3.connect(db_name_proxy)
             c = conn.cursor()
             #print(type(data['PROXY'].iat[0]))
@@ -266,6 +258,7 @@ for _ in range(num_random_process):
             conn.commit()
             #print('pausa 1 sec')
             conn.close()
+            os.remove(filename)
             driver.close()
 
     else:
