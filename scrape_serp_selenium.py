@@ -160,6 +160,71 @@ for _ in range(num_random_process):
         statinfo = os.stat(filename)
         print(statinfo.st_size)
         if statinfo.st_size > 70000:
+
+            #primo controllo
+            if soup.find('div',id='introAgreeButton') is None:
+                print('YYYYYYYYYY-no captcha')
+            else:
+                print('trovato introAgreeButton')
+                #os.remove(filename)
+                print('file eliminato')
+                conn = sqlite3.connect(db_name_keyword)
+                c = conn.cursor()
+                c.execute("Update KEYWORDS_LIST set CHECKING = 0 where KEYWORDS = ?",(keyword,))
+                conn.commit()
+                conn.close()
+                num = random.randint(1,3)
+                #print(f'pausa {num} sec')
+                with open(test_proxy, 'a') as f:
+                    f.write(f"{proxy};{timestr};Richiesta Captcha;{new_keyword};\n")
+                    print('file scritto correttamente')
+                    # Selezione proxy
+                
+                conn = sqlite3.connect(db_name_proxy)
+                c = conn.cursor()
+                #print(type(data['PROXY'].iat[0]))
+                print('---------------------Proxy da posticipare '+proxy)
+                postpone_time = str(datetime.now() + timedelta(minutes=50))
+                #print(postpone_time)
+                timestr_postpone = datetime.fromisoformat(postpone_time).timestamp()
+                c.execute("Update PROXY_LIST set TIME = ? where PROXY = ?",(timestr_postpone,proxy))
+                conn.commit()
+                #print('pausa 1 sec')
+                conn.close()
+                driver.close()
+                
+            #secondo controllo
+            if soup.find('div',id='sub-frame-error-details') is None:
+                print('YYYYYYYYYY-no captcha')
+            else:
+                print('trovato sub-frame-error-details')
+                #os.remove(filename)
+                print('file eliminato')
+                conn = sqlite3.connect(db_name_keyword)
+                c = conn.cursor()
+                c.execute("Update KEYWORDS_LIST set CHECKING = 0 where KEYWORDS = ?",(keyword,))
+                conn.commit()
+                conn.close()
+                num = random.randint(1,3)
+                #print(f'pausa {num} sec')
+                with open(test_proxy, 'a') as f:
+                    f.write(f"{proxy};{timestr};Richiesta Captcha;{new_keyword};\n")
+                    print('file scritto correttamente')
+                    # Selezione proxy
+                
+                conn = sqlite3.connect(db_name_proxy)
+                c = conn.cursor()
+                #print(type(data['PROXY'].iat[0]))
+                print('---------------------Proxy da posticipare '+proxy)
+                postpone_time = str(datetime.now() + timedelta(minutes=50))
+                #print(postpone_time)
+                timestr_postpone = datetime.fromisoformat(postpone_time).timestamp()
+                c.execute("Update PROXY_LIST set TIME = ? where PROXY = ?",(timestr_postpone,proxy))
+                conn.commit()
+                #print('pausa 1 sec')
+                conn.close()
+                driver.close()
+
             print('YYYYYYYYYY-no captcha')
             conn = sqlite3.connect(db_name_keyword)
             c = conn.cursor()
@@ -172,100 +237,39 @@ for _ in range(num_random_process):
                 f.write(f"{proxy};{timestr};Esecuzione Corretta;{new_keyword}\n")
                 print('file scritto correttamente')
             driver.delete_all_cookies()
-        elif soup.find('div',id='introAgreeButton') is not None:
-            print('XXXXXXXXX-richiesta non andata a buon fine')
-            if os.path.exists(filename):
-                #os.remove(filename)
-                print('file eliminato')
-                conn = sqlite3.connect(db_name_keyword)
-                c = conn.cursor()
-                c.execute("Update KEYWORDS_LIST set CHECKING = 0 where KEYWORDS = ?",(keyword,))
-                conn.commit()
-                conn.close()
-                num = random.randint(1,3)
-                #print(f'pausa {num} sec')
-                with open(test_proxy, 'a') as f:
-                    f.write(f"{proxy};{timestr};Richiesta Captcha;{new_keyword};\n")
-                    print('file scritto correttamente')
-                    # Selezione proxy
-                
-                conn = sqlite3.connect(db_name_proxy)
-                c = conn.cursor()
-                #print(type(data['PROXY'].iat[0]))
-                print('---------------------Proxy da posticipare '+proxy)
-                postpone_time = str(datetime.now() + timedelta(minutes=50))
-                #print(postpone_time)
-                timestr_postpone = datetime.fromisoformat(postpone_time).timestamp()
-                c.execute("Update PROXY_LIST set TIME = ? where PROXY = ?",(timestr_postpone,proxy))
-                conn.commit()
-                #print('pausa 1 sec')
-                conn.close()
-            else:
-                print("The file does not exist")
-
-        elif soup.find('div',id='sub-frame-error-details'):
-            print('XXXXXXXXX-richiesta non andata a buon fine')
-            if os.path.exists(filename):
-                #os.remove(filename)
-                print('file eliminato')
-                conn = sqlite3.connect(db_name_keyword)
-                c = conn.cursor()
-                c.execute("Update KEYWORDS_LIST set CHECKING = 0 where KEYWORDS = ?",(keyword,))
-                conn.commit()
-                conn.close()
-                num = random.randint(1,3)
-                #print(f'pausa {num} sec')
-                with open(test_proxy, 'a') as f:
-                    f.write(f"{proxy};{timestr};Richiesta Captcha;{new_keyword};\n")
-                    print('file scritto correttamente')
-                    # Selezione proxy
-                
-                conn = sqlite3.connect(db_name_proxy)
-                c = conn.cursor()
-                #print(type(data['PROXY'].iat[0]))
-                print('---------------------Proxy da posticipare '+proxy)
-                postpone_time = str(datetime.now() + timedelta(minutes=50))
-                #print(postpone_time)
-                timestr_postpone = datetime.fromisoformat(postpone_time).timestamp()
-                c.execute("Update PROXY_LIST set TIME = ? where PROXY = ?",(timestr_postpone,proxy))
-                conn.commit()
-                #print('pausa 1 sec')
-                conn.close()
-            else:
-                print("The file does not exist")
+    
 
         else:
-            print('XXXXXXXXX-hai preso il captcha')
-            if os.path.exists(filename):
-                #os.remove(filename)
-                print('file eliminato')
-                conn = sqlite3.connect(db_name_keyword)
-                c = conn.cursor()
-                c.execute("Update KEYWORDS_LIST set CHECKING = 0 where KEYWORDS = ?",(keyword,))
-                conn.commit()
-                conn.close()
-                num = random.randint(1,3)
-                #print(f'pausa {num} sec')
-                with open(test_proxy, 'a') as f:
-                    f.write(f"{proxy};{timestr};Richiesta Captcha;{new_keyword};\n")
-                    print('file scritto correttamente')
-                    # Selezione proxy
-                
-                conn = sqlite3.connect(db_name_proxy)
-                c = conn.cursor()
-                #print(type(data['PROXY'].iat[0]))
-                print('---------------------Proxy da posticipare '+proxy)
-                postpone_time = str(datetime.now() + timedelta(minutes=50))
-                #print(postpone_time)
-                timestr_postpone = datetime.fromisoformat(postpone_time).timestamp()
-                c.execute("Update PROXY_LIST set TIME = ? where PROXY = ?",(timestr_postpone,proxy))
-                conn.commit()
-                #print('pausa 1 sec')
-                conn.close()
-                
-                
-            else:
-                print("The file does not exist")
+            print('file minore di 70 KB')
+            #os.remove(filename)
+            print('file eliminato')
+            conn = sqlite3.connect(db_name_keyword)
+            c = conn.cursor()
+            c.execute("Update KEYWORDS_LIST set CHECKING = 0 where KEYWORDS = ?",(keyword,))
+            conn.commit()
+            conn.close()
+            num = random.randint(1,3)
+            #print(f'pausa {num} sec')
+            with open(test_proxy, 'a') as f:
+                f.write(f"{proxy};{timestr};Richiesta Captcha;{new_keyword};\n")
+                print('file scritto correttamente')
+                # Selezione proxy
+            
+            conn = sqlite3.connect(db_name_proxy)
+            c = conn.cursor()
+            #print(type(data['PROXY'].iat[0]))
+            print('---------------------Proxy da posticipare '+proxy)
+            postpone_time = str(datetime.now() + timedelta(minutes=50))
+            #print(postpone_time)
+            timestr_postpone = datetime.fromisoformat(postpone_time).timestamp()
+            c.execute("Update PROXY_LIST set TIME = ? where PROXY = ?",(timestr_postpone,proxy))
+            conn.commit()
+            #print('pausa 1 sec')
+            conn.close()
+            driver.close()
+
+    else:
+        print('File non esiste')
 
 #print(f'pausa {pausa} secondi')
 driver.close()
