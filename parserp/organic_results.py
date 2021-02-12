@@ -21,26 +21,30 @@ def get_organic_results(soup):
     #div_obj['Snippets'] = []
     #div_obj['Cached Page Links'] = []
     #div_obj['Inline Links'] = []
-    #soup = soup_from_file(f'{html_file}/{file}'.format(file=file,html_file=html_file))
-    html_organic_results = soup.find("div", {"id": "rso"})
-    #print(html_organic_results)
-    organic_results = html_organic_results.find_all('div',class_='g')
-    #print(organic_results)
 
-    for organic_result in organic_results:
-        keyword = soup.find('title').text.strip().split('-')[0]
-        #print(keyword)
-        div_obj['Keyword'].append(keyword)
-        #posizione + 1
-        div_obj['Position'].append(position)
-        #print(position)
-        position +=1
-        title = organic_result.find('h3').text.strip()
-        #print(title)
-        div_obj['Titles'].append(title)
-        link = organic_result.find('a').attrs['href']
-        #print(link)
-        div_obj['Links'].append(link)
+    html_organic_results2 = soup.find("div", {"id": "rso"})
+    #print(html_organic_results2.prettify())
+    html_organic_results = html_organic_results2.find_all("div", {"class": "hlcw0c"})
+    print(html_organic_results)
+    #organic_results = html_organic_results.find_all('div',class_='g')
+    for html_organic_result in html_organic_results:
+        organic_results = html_organic_result.find_all('div',class_='g')
+        #print(organic_results)
+
+        for organic_result in organic_results:
+            keyword = soup.find('title').text.strip().split('-')[0]
+            #print(keyword)
+            div_obj['Keyword'].append(keyword)
+            #posizione + 1
+            div_obj['Position'].append(position)
+            #print(position)
+            position +=1
+            title = organic_result.find('h3').text.strip()
+            #print(title)
+            div_obj['Titles'].append(title)
+            link = organic_result.find('a').attrs['href']
+            #print(link)
+            div_obj['Links'].append(link)
     #print(div_obj)
     div_obj_df = pd.DataFrame(div_obj, index=None)
     now = datetime.now()
