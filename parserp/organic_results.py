@@ -20,6 +20,7 @@ def get_organic_results(soup):
 
     # creazione sezione con risultati organici
     html_organic_results = soup.find("div", {"id": "rso"})
+    #print(html_organic_results)
 
 
     # rimozione dei div con class="g" duplicati
@@ -29,24 +30,31 @@ def get_organic_results(soup):
         html_organic_results.find('div',class_='mnr-c').decompose()
     if html_organic_results.find('div',class_='ULSxyf') is not None:
         html_organic_results.find('div',class_='ULSxyf').decompose()
+    if html_organic_results.find('div',class_='mod') is not None:
+        html_organic_results.find('div',class_='mod').decompose()
 
+    #print(html_organic_results)
 
     # estrazione dati
     organic_results = html_organic_results.find_all('div',class_='g')
     #print(organic_results)
+
     for organic_result in organic_results:
+        with open('test.txt', 'a', encoding='utf-8') as f:
+            f.write(organic_result.prettify()) 
         keyword = soup.find('title').text.strip().split('-')[0]
-        #print(keyword)
+        print(keyword)
         div_obj['Keyword'].append(keyword)
-        #posizione + 1
+        # posizione + 1
         div_obj['Position'].append(position)
-        #print(position)
+        print(position)
         position +=1
         title = organic_result.find('h3').text.strip()
-        #print(title)
+        title = re.sub("\s+", " ", title)
+        print(title)
         div_obj['Titles'].append(title)
         link = organic_result.find('a').attrs['href']
-        #print(link)
+        print(link)
         div_obj['Links'].append(link)
 
     #print(div_obj)
