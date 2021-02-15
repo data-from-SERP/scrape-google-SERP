@@ -21,6 +21,13 @@ def get_related_searches(soup):
     #html_related_searches = soup.find("div", {"class": "card-section"})
     html_related_searches = soup.find("div", {"id": "botstuff"})
 
+    if html_related_searches.find('div',class_='card-section') is not None:
+        html_related_searches = html_related_searches.find("div", {"class": "card-section"})
+        print('card-section trovato')
+    else:
+        html_related_searches = soup.find("div", {"id": "botstuff"})
+
+
     # # rimozione dei div non pertinenti
     # if html_related_searches.find('div',class_='obcontainer') is not None:
     #     html_related_searches.find('div',class_='obcontainer').decompose()
