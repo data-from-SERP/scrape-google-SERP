@@ -32,6 +32,8 @@ def get_organic_results(soup):
         html_organic_results.find('div',class_='ULSxyf').decompose()
     if html_organic_results.find('div',class_='mod') is not None:
         html_organic_results.find('div',class_='mod').decompose()
+    if html_organic_results.find_all(attrs={'data-hveid' : 'CAcQAA'}) is not None:
+        html_organic_results.find(attrs={'data-hveid' : 'CAcQAA'}).decompose()
 
     #print(html_organic_results)
 
@@ -40,21 +42,21 @@ def get_organic_results(soup):
     #print(organic_results)
 
     for organic_result in organic_results:
-        with open('test.txt', 'a', encoding='utf-8') as f:
-            f.write(organic_result.prettify()) 
+        # with open('test.txt', 'a', encoding='utf-8') as f:
+        #     f.write(organic_result.prettify()) 
         keyword = soup.find('title').text.strip().split('-')[0]
-        #print(keyword)
+        print(keyword)
         div_obj['Keyword'].append(keyword)
         # posizione + 1
         div_obj['Position'].append(position)
-        #print(position)
+        print(position)
         position +=1
         title = organic_result.find('h3').text.strip()
         title = re.sub("\s+", " ", title)
-        #print(title)
+        print(title)
         div_obj['Titles'].append(title)
         link = organic_result.find('a').attrs['href']
-        #print(link)
+        print(link)
         div_obj['Links'].append(link)
 
     #print(div_obj)
