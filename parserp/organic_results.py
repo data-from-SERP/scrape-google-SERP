@@ -32,11 +32,6 @@ def get_organic_results(soup):
         html_organic_results.find('div',class_='ULSxyf').decompose()
     if html_organic_results.find('div',class_='mod') is not None:
         html_organic_results.find('div',class_='mod').decompose()
-    try:
-        if html_organic_results.find_all(attrs={'data-hveid' : 'CAcQAA'}) is not None:
-            html_organic_results.find(attrs={'data-hveid' : 'CAcQAA'}).decompose()
-    except:
-        pass
     #print(html_organic_results)
 
     # estrazione dati
@@ -45,21 +40,25 @@ def get_organic_results(soup):
 
     for organic_result in organic_results:
         # with open('test.txt', 'a', encoding='utf-8') as f:
-        #     f.write(organic_result.prettify()) 
-        keyword = soup.find('title').text.strip().split('-')[0]
-        print(keyword)
-        div_obj['Keyword'].append(keyword)
-        # posizione + 1
-        div_obj['Position'].append(position)
-        print(position)
-        position +=1
-        title = organic_result.find('h3').text.strip()
-        title = re.sub("\s+", " ", title)
-        print(title)
-        div_obj['Titles'].append(title)
-        link = organic_result.find('a').attrs['href']
-        print(link)
-        div_obj['Links'].append(link)
+        #     f.write(organic_result.prettify())
+        if organic_result.find('h3') is not None:
+
+            keyword = soup.find('title').text.strip().split('-')[0]
+            #print(keyword)
+            div_obj['Keyword'].append(keyword)
+            # posizione + 1
+            div_obj['Position'].append(position)
+            #print(position)
+            position +=1
+            title = organic_result.find('h3').text.strip()
+            title = re.sub("\s+", " ", title)
+            #print(title)
+            div_obj['Titles'].append(title)
+            link = organic_result.find('a').attrs['href']
+            #print(link)
+            div_obj['Links'].append(link)
+        else:
+            print('saltato')
 
     #print(div_obj)
     div_obj_df = pd.DataFrame(div_obj, index=None)
