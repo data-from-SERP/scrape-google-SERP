@@ -19,76 +19,40 @@ def get_organic_results(soup):
     div_obj['Titles'] = []
     div_obj['Links'] = []
 
-
+    # creazione sezione con risultati organici
     html_organic_results = soup.find("div", {"id": "rso"})
-    #print(html_organic_results)
 
-    # primo tentativo
+    # rimozione dei div con class="g" duplicati
+    if html_organic_results.find('div',class_='kno-kp') is not None:
+        html_organic_results.find('div',class_='kno-kp').decompose()
+    if html_organic_results.find('div',class_='mnr-c') is not None:
+        html_organic_results.find('div',class_='mnr-c').decompose()
+
+    # estrazione dati
     try:
-        if html_organic_results.find('div',class_='hlcw0c') is not None:
-            print('YYYYYYYYYY-no hlcw0c')
-            html_organic_results = html_organic_results.find_all("div", {"class": "hlcw0c"})
-            #print(html_organic_results)
-            #organic_results = html_organic_results.find_all('div',class_='g')
-            for html_organic_result in html_organic_results:
-                organic_results = html_organic_result.find_all('div',class_='g')
-                #print(organic_results)
+        organic_results = html_organic_results.find_all('div',class_='g')
+        #print(organic_results)
+        for organic_result in organic_results:
+            keyword = soup.find('title').text.strip().split('-')[0]
+            #print(keyword)
+            div_obj['Keyword'].append(keyword)
+            #posizione + 1
+            div_obj['Position'].append(position)
+            #print(position)
+            position +=1
+            title = organic_result.find('h3').text.strip()
+            #print(title)
+            div_obj['Titles'].append(title)
+            link = organic_result.find('a').attrs['href']
+            #print(link)
+            div_obj['Links'].append(link)
 
-                for organic_result in organic_results:
-                    keyword = soup.find('title').text.strip().split('-')[0]
-                    #print(keyword)
-                    div_obj['Keyword'].append(keyword)
-                    #posizione + 1
-                    div_obj['Position'].append(position)
-                    #print(position)
-                    position +=1
-                    title = organic_result.find('h3').text.strip()
-                    #print(title)
-                    div_obj['Titles'].append(title)
-                    link = organic_result.find('a').attrs['href']
-                    #print(link)
-                    div_obj['Links'].append(link)
-            #print(div_obj)
-            div_obj_df = pd.DataFrame(div_obj, index=None)
-            now = datetime.now()
-            dt_string = now.strftime("%Y%m%d-%H")
-            #print(dt_string)
-            div_obj_df.to_csv(f'{output_files}/{dt_string}-{file_organic_results}', mode='a', header=False, index=False, encoding='UTF-8', sep=';')
-            print('---- organic_results')
-        else:
-            print('NNNNNNNNNN-no hlcw0c')
+        #print(div_obj)
+        div_obj_df = pd.DataFrame(div_obj, index=None)
+        now = datetime.now()
+        dt_string = now.strftime("%Y%m%d-%H")
+        #print(dt_string)
+        div_obj_df.to_csv(f'{output_files}/{dt_string}-{file_organic_results}', mode='a', header=False, index=False, encoding='UTF-8', sep=';')
+        print('---- organic_results')
     except:
-        print('pass')
-
-
-    # secondo tentativo
-    try:
-        if html_organic_results.find('div',class_='hlcw0c') is None:
-            print('YYYYYYYYYY-sì hlcw0c')
-            organic_results = html_organic_results.find_all('div',class_='g')
-            #print(organic_results)
-            for organic_result in organic_results:
-                keyword = soup.find('title').text.strip().split('-')[0]
-                #print(keyword)
-                div_obj['Keyword'].append(keyword)
-                #posizione + 1
-                div_obj['Position'].append(position)
-                #print(position)
-                position +=1
-                title = organic_result.find('h3').text.strip()
-                #print(title)
-                div_obj['Titles'].append(title)
-                link = organic_result.find('a').attrs['href']
-                #print(link)
-                div_obj['Links'].append(link)
-            #print(div_obj)
-            div_obj_df = pd.DataFrame(div_obj, index=None)
-            now = datetime.now()
-            dt_string = now.strftime("%Y%m%d-%H")
-            #print(dt_string)
-            div_obj_df.to_csv(f'{output_files}/{dt_string}-{file_organic_results}', mode='a', header=False, index=False, encoding='UTF-8', sep=';')
-            print('---- organic_results')
-        else:
-            print('NNNNNNNNNN-sì hlcw0c')
-    except:
-        print('pass2')
+        print('---------------------------------pass2')
