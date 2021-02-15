@@ -32,9 +32,11 @@ def get_organic_results(soup):
         html_organic_results.find('div',class_='ULSxyf').decompose()
     if html_organic_results.find('div',class_='mod') is not None:
         html_organic_results.find('div',class_='mod').decompose()
-    if html_organic_results.find_all(attrs={'data-hveid' : 'CAcQAA'}) is not None:
-        html_organic_results.find(attrs={'data-hveid' : 'CAcQAA'}).decompose()
-
+    try:
+        if html_organic_results.find_all(attrs={'data-hveid' : 'CAcQAA'}) is not None:
+            html_organic_results.find(attrs={'data-hveid' : 'CAcQAA'}).decompose()
+    except:
+        pass
     #print(html_organic_results)
 
     # estrazione dati
