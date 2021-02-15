@@ -16,8 +16,16 @@ def get_related_searches(soup):
     div_obj['Query'] = []
     div_obj['Link'] = []
 
-    #soup = soup_from_file(f'{html_file}/{file}'.format(file=file,html_file=html_file))
-    html_related_searches = soup.find("div", {"class": "card-section"})
+
+    # creazione sezione con risultati correlati
+    #html_related_searches = soup.find("div", {"class": "card-section"})
+    html_related_searches = soup.find("div", {"id": "botstuff"})
+
+    # # rimozione dei div non pertinenti
+    # if html_related_searches.find('div',class_='obcontainer') is not None:
+    #     html_related_searches.find('div',class_='obcontainer').decompose()
+
+
     #print(html_relate)
     related_queries = html_related_searches.find_all('a')
     #print(related_queries)
