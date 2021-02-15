@@ -10,7 +10,6 @@ output_files = 'output_data'
 file_organic_results = 'organic_results.csv'
 
 
-
 def get_organic_results(soup):
     position = 1
     div_obj = {}
@@ -22,11 +21,15 @@ def get_organic_results(soup):
     # creazione sezione con risultati organici
     html_organic_results = soup.find("div", {"id": "rso"})
 
+
     # rimozione dei div con class="g" duplicati
     if html_organic_results.find('div',class_='kno-kp') is not None:
         html_organic_results.find('div',class_='kno-kp').decompose()
     if html_organic_results.find('div',class_='mnr-c') is not None:
         html_organic_results.find('div',class_='mnr-c').decompose()
+    if html_organic_results.find('div',class_='ULSxyf') is not None:
+        html_organic_results.find('div',class_='ULSxyf').decompose()
+
 
     # estrazione dati
     organic_results = html_organic_results.find_all('div',class_='g')
