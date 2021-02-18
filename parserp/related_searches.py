@@ -34,6 +34,9 @@ def get_related_searches(soup):
     #     html_related_searches.find('div',class_='obcontainer').decompose()
     if html_related_searches.find('div',class_='mnr-c') is not None:
         html_related_searches.find('div',class_='mnr-c').decompose()
+    if html_related_searches.find('div',class_='lgJJud') is not None:
+        html_related_searches.find('div',class_='lgJJud').decompose()
+    
 
     #print(html_relate)
     related_queries = html_related_searches.find_all('a')
