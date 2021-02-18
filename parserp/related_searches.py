@@ -28,10 +28,12 @@ def get_related_searches(soup):
         html_related_searches = soup.find("div", {"id": "botstuff"})
 
 
+
     # # rimozione dei div non pertinenti
     # if html_related_searches.find('div',class_='obcontainer') is not None:
     #     html_related_searches.find('div',class_='obcontainer').decompose()
-
+    if html_organic_results.find('div',class_='mnr-c') is not None:
+        html_organic_results.find('div',class_='mnr-c').decompose()
 
     #print(html_relate)
     related_queries = html_related_searches.find_all('a')
