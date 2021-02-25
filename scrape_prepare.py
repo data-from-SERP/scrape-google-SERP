@@ -72,7 +72,7 @@ def create_db_and_folder():
     #
     #
     # Creazione dataframe keyword
-    dataframe = pd.read_csv(file_kw, encoding='utf-8', header=None)
+    dataframe = pd.read_csv(file_kw, encoding='utf-8', sep=';', header=None)
     dataframe['CHECKING'] = 0
     dataframe['SUM'] = 0
     dataframe.columns = ['KEYWORDS','CHECKING','SUM']
