@@ -99,7 +99,7 @@ try:
 except:
     print('Accettazione Cookie non richiesta')
 '''
-num_random_process = random.randint(10,15)
+num_random_process = random.randint(15,20)
 for _ in range(num_random_process):
     select_keyword()
     print(f'new_keyword ------- {new_keyword}')
