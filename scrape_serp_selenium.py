@@ -1,4 +1,4 @@
-import os, time, sqlite3, random, io
+import os, time, sqlite3, random, io, urllib
 import pandas as pd
 
 from pandas import DataFrame
@@ -64,10 +64,7 @@ def select_keyword():
     #print(f'pausa {num} sec')
 
     #print(keyword)
-    new_keyword2 = keyword.replace("%", "%25")
-    new_keyword1 = new_keyword2.replace(" ", "+")
-    global new_keyword
-    new_keyword = new_keyword1.replace("/", "-")
+    new_keyword = urllib.parse.quote_plus(keyword)
     #print(new_keyword)
 
 
