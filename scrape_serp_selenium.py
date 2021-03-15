@@ -63,6 +63,7 @@ def select_keyword():
     #print(f'pausa {num} sec')
 
     #print(keyword)
+    global new_keyword
     new_keyword = urllib.parse.quote_plus(keyword)
     #print(new_keyword)
 
