@@ -14,7 +14,6 @@ create_db_and_folder()
 #
 # Variabili
 uule = 'w+CAIQICIFSXRhbHk'
-tci = 'g:2380'
 hl = 'IT'
 gl = 'it'
 domain_search = 'https://www.google.it/search?q='
@@ -101,7 +100,7 @@ for _ in range(num_random_process):
     select_keyword()
     print(f'new_keyword ------- {new_keyword}')
     #accettazione cookie
-    new_url = f'{domain_search}{new_keyword}&oq={new_keyword}&hl={hl}&gl={gl}&tci={tci}&uule={uule}&sourceid=chrome&ie=UTF-8'
+    new_url = f'{domain_search}{new_keyword}&oq={new_keyword}&hl={hl}&gl={gl}&uule={uule}&sourceid=chrome&ie=UTF-8'
     #print(new_url)
     driver.get(new_url)
     current_url = driver.current_url
