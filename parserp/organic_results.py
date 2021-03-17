@@ -66,5 +66,5 @@ def get_organic_results(soup):
     now = datetime.now()
     dt_string = now.strftime("%Y%m%d-%H")
     #print(dt_string)
-    div_obj_df.to_csv(f'{output_files}/{dt_string}-{file_organic_results}', mode='a', header=False, index=False, encoding='UTF-8', sep=';')
+    div_obj_df.to_csv(f'{output_files}/{dt_string}-{file_organic_results}', mode='a', header=False, index=False, encoding='UTF-8', sep='\t')
     print('---- organic_results')
