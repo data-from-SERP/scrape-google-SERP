@@ -44,6 +44,7 @@ def get_organic_results(soup):
         if organic_result.find('h3') is not None:
 
             keyword = soup.find('title').text.strip().split('-')[0]
+            keyword = keyword.rstrip()
             #print(keyword)
             div_obj['Keyword'].append(keyword)
             # posizione + 1
