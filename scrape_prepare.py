@@ -27,10 +27,10 @@ def create_db_and_folder():
     #
     #
     # File
-    file_kw = input_data+'/keywords.txt'
-    file_proxies = config_file+'/proxies_list.txt'
-    db_name_keyword = teporary_file+'/Keywords_list.db'
-    db_name_proxy = teporary_file+'/Proxy_list.db'
+    #file_kw = input_data+'/keywords.txt'
+    file_proxies = os.environ.get("file_proxies")
+    db_name_keyword = os.environ.get("db_name_keyword")
+    db_name_proxy = os.environ.get("db_name_proxy")
 
 
     #
