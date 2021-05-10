@@ -5,3 +5,4 @@ output_html/
 teporary_file/
 chromedriver
 output_data/
+__pycache__/
