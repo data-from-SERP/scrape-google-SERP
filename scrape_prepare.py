@@ -3,12 +3,14 @@ import pandas as pd
 from pandas import DataFrame
 from datetime import datetime
 from os import path
+from dotenv import load_dotenv
+load_dotenv()
 
 def create_db_and_folder():
-    output_html = 'output_html'
-    teporary_file = 'teporary_file'
-    input_data = 'input_data'
-    file_kw = input_data+'/keywords.txt'
+    output_html = os.environ.get("output_html")
+    teporary_file = os.environ.get("teporary_file")
+    input_data = os.environ.get("input_data")
+    file_kw = input_data+os.environ.get("kw_file")
 
 
     #creazione Cartelle
@@ -102,3 +104,5 @@ def create_db_and_folder():
     else:
         print('DB già presente KEYWORDS')
 
+
+#create_db_and_folder()
