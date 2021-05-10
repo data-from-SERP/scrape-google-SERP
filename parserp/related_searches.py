@@ -56,5 +56,5 @@ def get_related_searches(soup):
     #print(div_obj_df)
     now = datetime.now()
     dt_string = now.strftime("%Y%m%d-%H")
-    div_obj_df.to_csv(f'{output_files}/{dt_string}-{file_related_searches}', mode='a', header=False, index=False, encoding='UTF-8', sep=';')
+    div_obj_df.to_csv(f'{output_files}/{dt_string}-{file_related_searches}', mode='a', header=False, index=False, encoding='UTF-8', sep='\t')
     print('---- related_searches')
