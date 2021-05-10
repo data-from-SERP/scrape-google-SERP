@@ -1,3 +1,7 @@
 .env
 config_file/
 input_data/
+output_html/
+teporary_file/
+chromedriver
+output_data/

@@ -13,20 +13,21 @@ create_db_and_folder()
 
 #
 # Variabili
-uule = 'w+CAIQICIFSXRhbHk'
-hl = 'IT'
-gl = 'it'
-domain_search = 'https://www.google.it/search?q='
+uule = os.environ.get("uule")
+hl = os.environ.get("hl")
+gl = os.environ.get("gl")
+domain_search = os.environ.get("domain_search")
 
-config_file = 'config_file'
-input_data = 'input_data'
-output_html = 'output_html'
-teporary_file = 'teporary_file'
-file_kw = input_data+'/keywords.txt'
-file_proxies = config_file+'/proxies_list.txt'
-db_name_keyword = teporary_file+'/Keywords_list.db'
-db_name_proxy = teporary_file+'/Proxy_list.db'
-test_proxy = 'output_html/test_proxy.txt'
+
+config_file = os.environ.get("config_file")
+input_data = os.environ.get("input_data")
+output_html = os.environ.get("output_html")
+teporary_file = os.environ.get("teporary_file")
+file_kw = input_data+os.environ.get("kw_file")
+file_proxies = os.environ.get("file_proxies")
+db_name_keyword = os.environ.get("db_name_keyword")
+db_name_proxy = os.environ.get("db_name_proxy")
+test_proxy = os.environ.get("test_proxy")
 
 def select_proxy():
     conn = sqlite3.connect(db_name_proxy)
@@ -78,7 +79,7 @@ option.add_experimental_option("excludeSwitches", ["enable-automation"])
 option.add_experimental_option('useAutomationExtension', False)
 option.add_argument('--disable-blink-features=AutomationControlled')
 #Proxy
-option.add_argument(f'proxy-server={proxy}')
+#option.add_argument(f'proxy-server={proxy}')
 #headless
 #option.add_argument("--headless")
 #incognito
@@ -87,8 +88,7 @@ option.add_argument('--incognito')
 #creazione e apertura browsers
 driver = webdriver.Chrome('./chromedriver',options=option)
 driver.maximize_window()
-#driver.get(f'https://www.google.it/?hl={hl}&gl={gl}&tci={tci}&uule={uule}&sourceid=chrome&ie=UTF-8')
-#print(driver.title)
+
 '''
 try:
     iframe = driver.switch_to.frame(driver.find_element_by_tag_name("iframe"))
