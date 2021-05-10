@@ -8,6 +8,8 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 from scrape_prepare import create_db_and_folder
+from dotenv import load_dotenv
+load_dotenv()
 
 create_db_and_folder()
 

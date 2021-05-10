@@ -8,18 +8,17 @@ from parserp import organic_results
 from parserp import related_searches
 from parserp import inline_shopping
 from parserp import paa_results
-
+from dotenv import load_dotenv
+load_dotenv()
 
 #variabili
-html_file = 'output_html'
-html_file_error = 'output_html_error'
-output_files = 'output_data'
+html_file = os.environ.get("output_html")
+output_files = os.environ.get("output_data")
 
 #creazione cartelle
 if not os.path.exists(output_files):
     os.makedirs(output_files)
-if not os.path.exists(html_file_error):
-    os.makedirs(html_file_error)
+
 
 # #test single file
 # file = '20210212-135545-bombole+a+gas+per+barbecue.html'
