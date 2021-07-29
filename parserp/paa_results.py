@@ -19,9 +19,11 @@ def get_paa_results(soup):
 
     try:
         html_paa_results = soup.find("div", {"class": "ifM9O"})
-        #print(html_paa_results)
-        #html_paa_results = soup.find_all('div', {'class': 'related-question-pair'})
+        print(html_paa_results)
 
+        #html_paa_results = soup.find_all('div', {'class': 'related-question-pair'})
+        paa_results = soup.find('div', {'class': 'related-question-pair'})
+        #print(html_paa_results)
         #if soup.find_all('div', {'class': 'related-question-pair'}):
         #   print('Tag Found')
         #   print(soup.find_all('div', {'class': 'related-question-pair'}).text)
@@ -29,7 +31,7 @@ def get_paa_results(soup):
         #   print(questions)
 
         paa_results = html_paa_results.find_all('div',class_='cbphWd')
-        #print(paa_results)
+        print(paa_results)
         for paa_result in paa_results:
             #if paa_result.find('div') is not None:
 

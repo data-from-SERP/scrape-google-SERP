@@ -40,7 +40,7 @@ def select_proxy():
     #print(type(data['PROXY'].iat[0]))
     global proxy
     proxy = (data['PROXY'].iat[0])
-    #print(f'---------------------Request IP is {proxy}')
+    print(f'---------------------Request IP is {proxy}')
     timestr_now = str(datetime.now())
     #print(timestr_now)
     #global timestr
@@ -106,12 +106,15 @@ for _ in range(num_random_process):
     select_keyword()
     print(f'new_keyword ------- {new_keyword}')
     #accettazione cookie
+    #new_url = 'https://www.ilmioip.it/'
+    
     new_url = f'{domain_search}{new_keyword}&oq={new_keyword}&hl={hl}&gl={gl}&uule={uule}&sourceid=chrome&ie=UTF-8'
     #logging.debug(new_url)
 
     #print(new_url)
     #time.sleep(1)
     driver.get(new_url)
+    #time.sleep(10)
     current_url = driver.current_url
     captcha_url = 'sorry/index?continue'
     #print(current_url)

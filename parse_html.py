@@ -20,17 +20,20 @@ if not os.path.exists(output_files):
     os.makedirs(output_files)
 
 
-# #test single file
-# file = '20210212-135545-bombole+a+gas+per+barbecue.html'
+#test single file
+# file = '20210621-103329-albero+della+vita+significato.html'
 # print(file)
 # #filename = file
 # soup = soup_from_file.get_soup_from_file(file)
-# organic_results.get_organic_results(soup)
+# #organic_results.get_organic_results(soup)
 # #related_searches.get_related_searches(soup)
 # #inline_shopping.get_inline_shopping(soup)
+# paa_results.get_paa_results(soup)
 # print('finito file')
 
+
 #per la lista di file
+
 counter_file = 1
 files = [file for file in os.listdir(html_file) if '.html' in file]
 for file in files:
