@@ -9,6 +9,10 @@ import logging
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 from scrape_prepare import create_db_and_folder
+
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -90,7 +94,8 @@ option.add_argument("--headless")
 option.add_argument('--incognito')
 #
 #creazione e apertura browsers
-driver = webdriver.Chrome('./chromedriver',options=option)
+driver = webdriver.Chrome(ChromeDriverManager().install(),options=option)
+#driver = webdriver.Chrome('./chromedriver',options=option)
 driver.maximize_window()
 time.sleep(1)
 
