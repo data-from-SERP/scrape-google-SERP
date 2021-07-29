@@ -32,7 +32,6 @@ if not os.path.exists(output_files):
 # print('finito file')
 
 
-
 #per la lista di file
 
 counter_file = 1
